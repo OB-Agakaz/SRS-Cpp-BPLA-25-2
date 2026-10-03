@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+int menu() {
     int choice; // вводит функцию choice которая является цифрой
 
     while (true) { // нужно чтобы меню показывалось после выбора опции
@@ -43,5 +43,31 @@ int main() {
             break;
     }
     }
+    return 0;
+}
+void premenu() {
+    int workdays;
+    double stavka; // позволяет вводить дробные числа
+    double workinghours;
+    double weekworkhours = workdays * workinghours;
+    const double standard_workinghours = 8.0; // константа при ставке 1.0
+    cout << "Прежде чем прейти в меню, введите кол/во рабочих дней и ставку (0.5, 1.0, 1.5 и т.д).\n";
+    cin >> workdays >> stavka;
+
+    while (true) {cout << "Введите длительность рабочего дня в часах.\n";
+    cin >> workinghours;
+    double correctworkinghours = standard_workinghours * stavka;
+    double correctweekworkinghours = correctworkinghours * workdays;
+    if (workinghours == correctworkinghours) {
+        cout << "Данные, введены правильно, приступайте к меню.\n" << endl;
+        menu ();
+        break;
+    } else {
+        cout << "Ошибка! При " << workdays << "-дневной рабочей неделе " << workinghours <<" часа в день составляют " << weekworkhours << " часов в неделю. Разница рабочего времени: " << correctweekworkinghours - weekworkhours << " (" << correctweekworkinghours/weekworkhours * 100 << "% от нормы ставки " << stavka << "). Налицо факт предоставления заведомо ложных сведений работодателю. Попробуйте ввести снова.\n";
+    }
+}
+}
+int main () {
+    premenu ();
     return 0;
 }
